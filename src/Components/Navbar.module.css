@@ -47,6 +47,7 @@ justify-content: center;
     background-color: #f5eafd;
     padding: 1rem;
     width: 15rem;
+    z-index: 99;
 }
 
 .no_menu{
