@@ -1,0 +1,63 @@
+.menu{
+    /* background-color: #8b8b8b; */
+    width: 100%;
+    border: none;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+    background: rgb(231,225,234);
+background: radial-gradient(circle, rgba(231,225,234,1) 28%, rgba(177,177,225,1) 91%);
+    /* gap: 2rem; */
+}
+
+.sidebar_main{
+    height: 100dvh;
+    scrollbar-width: 0 !important;
+    background: rgb(231,225,234);
+background: radial-gradient(circle, rgba(231,225,234,1) 28%, rgba(177,177,225,1) 91%);
+    width: 100%;
+    position: fixed;
+    
+    /* padding-top: 2rem; */
+    /* padding: 1rem; */
+}
+
+
+.item{
+    /* margin: 15px; */
+    gap: 10px;
+    font-size: 1.2rem;
+    /* margin: 1rem; */
+    /* padding: 1rem; */
+    padding-left: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    /* padding-left: 0; */
+}
+
+
+.item_title{
+    /* margin: ; */
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    /* text-align: center; */
+}
+
+.item_title span{
+    margin-bottom: 10px;
+    /* margin-left: 5px; */
+}
+
+/* .item:hover{
+    background-color: #9c9c9cc9;
+} */
