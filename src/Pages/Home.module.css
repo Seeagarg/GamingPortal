@@ -9,6 +9,7 @@
 
 .sub_container{
     /* border: 1px solid red; */
+    /* width: 95%; */
     padding: 1.5rem;
     background-color: #e7e1ea;
     border-radius: 20px;
@@ -26,6 +27,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1rem;
+    /* width: 100%; */
 }
 
 .block-container {
@@ -40,9 +42,10 @@
 
 .item{
 height: 20rem;
+
 background: rgb(231,225,234);
 background: linear-gradient(40deg, rgba(231,225,234,1) 30%, rgba(177,177,225,1) 77%);
-
+/* width: 100%; */
 /* background-color: #ffffff33;
       backdrop-filter: blur(20px); */
 padding: 7px;
@@ -113,19 +116,22 @@ position: relative;
 
   .item:hover .item_img{
     /* color: yellow; */
-    filter: brightness(50%);
-    -webkit-filter: brightness(50%);
+    filter: brightness(35%);
+    -webkit-filter: brightness(35%);
   }
   
   .item:hover .btn{
     display: flex;
+    justify-content: center;
     cursor: pointer;
     font-size: 1rem;
     position: absolute;
-    top: 40%;
-    left: 30%;
+    top: 35%;
+    width: 50%;
+    left: 27%;
     color: var(--text);
     font-weight: 500;
+    /* text-align: center; */
     letter-spacing: -0.025em;
     background-color: var(--clr);
     background-image:   
@@ -214,6 +220,25 @@ position: relative;
     
   }
 
+  .games_when_open{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    /* width: 100%; */
+  }
+
+
+  @media only screen and (max-width:1024px){
+
+
+    .games_when_open{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+
+
 
 
 
@@ -230,11 +255,20 @@ position: relative;
         border-radius: 20px;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
+    .games_when_open{
+      display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
 
     .item{
         height: 14.5rem;
         }
 
+        .item:hover .btn{
+          left: 30%;
+          top: 30%;
+        }
     
 }
 
@@ -249,4 +283,9 @@ position: relative;
         gap: 2rem;
         background-color: #b1b1e161;
     } 
+
+    .item:hover .btn{
+      left: 28%;
+      top: 35%;
+    }
 }

@@ -13,6 +13,7 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
+import {setCategory} from '../Slices/categorySlice'
 
 const Navbar = () => {
 
@@ -55,6 +56,7 @@ const Navbar = () => {
         placeholder='EN'
         isSearchable={false}
         value ={selectedOption}
+        // menuIsOpen
         styles={{
             control: (baseStyles, state) => ({
                     ...baseStyles,
@@ -72,6 +74,7 @@ const Navbar = () => {
                     ...baseStyles,
                     color: "black",
                     fontSize: "1rem",
+                    padding:'0'
                   }),
                   placeholder: (baseStyles) => ({
                     ...baseStyles,
@@ -80,10 +83,16 @@ const Navbar = () => {
                   }),
                   option: (baseStyles, state) => ({
                     ...baseStyles,
-                    backgroundColor: state.isSelected ? "#019FE340" : "#fff",
+                    backgroundColor: state.isSelected ? "#019FE340" : "#f5eafd",
                     color: state.isSelected ? "#172A6E" : "#172A6E",
                     cursor: "pointer",
+                    // padding:'0',
                   }),
+                  menuList:(baseStyles,state)=>({
+                    ...baseStyles,
+                    padding:'0',
+                    border:'none',
+                  })
                 }}
         onChange={handleChange}
         options={options}
@@ -99,29 +108,34 @@ const Navbar = () => {
 <div className={open?classes.menu:classes.no_menu}>
 
 {/* <div className={classes.menu_items}> */}
-<Link to='/' className={classes.item}>
+<Link to='/' className={classes.item} onClick={()=>{dispatch(setCategory("All Games"))}}>
+
+<SportsCricketIcon fontSize='large'/> <p>&nbsp; All Games</p>
+ 
+</Link>
+<Link to='/' className={classes.item}  onClick={()=>{dispatch(setCategory("Sports"))}}>
 
 <SportsCricketIcon fontSize='large'/> <p>&nbsp; Sports</p>
  
 </Link>
-<Link to='/' className={classes.item}>
+<Link to='/' className={classes.item}  onClick={()=>{dispatch(setCategory("Puzzle"))}}>
 
 <ExtensionIcon fontSize='large'/><p>&nbsp; Puzzle</p> 
 
 </Link>
-<Link to='/' className={classes.item}>
+<Link to='/' className={classes.item}  onClick={()=>{dispatch(setCategory("Racing"))}}>
 
 <SportsScoreIcon fontSize='large'/> <p>&nbsp;  Racing</p>
  
 </Link>
-<Link to='/' className={classes.item}>
+<Link to='/' className={classes.item}  onClick={()=>{dispatch(setCategory("Quiz"))}}>
 
 <QuestionMarkIcon fontSize='large'/><p>&nbsp; Quiz</p>
  
 </Link>
-<Link to='/' className={classes.item}>
+<Link to='/' className={classes.item}  onClick={()=>{dispatch(setCategory("Cards"))}}>
 
-<SportsKabaddiIcon fontSize='large'/> <p>&nbsp; Jump and Run </p>
+<SportsKabaddiIcon fontSize='large'/> <p>&nbsp; Cards </p>
 
 </Link>
 

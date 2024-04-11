@@ -1,10 +1,28 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers,configureStore } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import persistReducer from "redux-persist/lib/persistReducer";
 import langSliceReducer from "./Slices/langSlice";
+import sideBarSliceReducer from "./Slices/sideBarSlice";
+import categorySliceReducer from "./Slices/categorySlice";
+import persistStore from "redux-persist/es/persistStore";
 
-const store = configureStore({
-    reducer:{
-        langSlice:langSliceReducer
-    }
+
+const persistConfig = {
+    key:'root',
+    storage
+}
+
+const rootReducer = combineReducers({
+    categorySlice:categorySliceReducer,
+        langSlice:langSliceReducer,
+        sideBarSlice:sideBarSliceReducer
 })
 
-export default store;
+const persistedReducer = persistReducer(persistConfig,rootReducer);
+
+
+export const store = configureStore({
+    reducer:persistedReducer
+})
+
+export const persistor = persistStore(store)

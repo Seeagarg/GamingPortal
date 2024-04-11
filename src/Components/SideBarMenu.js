@@ -9,9 +9,16 @@ import SportsScoreIcon from '@mui/icons-material/SportsScore';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
 import MenuIcon from '@mui/icons-material/Menu';
+import { closeSideBar, openSideBar } from '../Slices/sideBarSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategory } from '../Slices/categorySlice';
 
 const SideBarMenu = () => {
-  const [open,setOpen] = useState(false)
+  // const [open,setOpen] = useState(false)
+
+  const dispatch = useDispatch();
+
+  const {open} = useSelector((state)=>state.sideBarSlice)
 
   return (
     <Sidebar collapsed={!open} className={classes.sidebar_main}>
@@ -36,13 +43,14 @@ const SideBarMenu = () => {
     }}
   >
   
-  <MenuItem onClick={()=>{setOpen(!open)}} className={classes.item_title}  ><MenuIcon/> </MenuItem>
+  <MenuItem onClick={()=>{!open?dispatch(openSideBar()):dispatch(closeSideBar())}} className={classes.item_title}  ><MenuIcon/> </MenuItem>
   {/* <SubMenu label="Categories"> */}
-    <MenuItem component={<Link to="/" />} className={classes.item} icon={<SportsCricketIcon fontSize='large'/>}> Sports Games</MenuItem>
-    <MenuItem component={<Link to="/profile" />} className={classes.item} icon={<ExtensionIcon fontSize='large'/>}> puzzle Games</MenuItem>
-    <MenuItem component={<Link to="/" />} className={classes.item} icon={<SportsScoreIcon fontSize='large'/>}> Racing Games</MenuItem>
-    <MenuItem component={<Link to="/" />} className={classes.item} icon={<QuestionMarkIcon fontSize='large'/>}> Quiz Games</MenuItem>
-    <MenuItem component={<Link to="/" />} className={classes.item} icon={<SportsKabaddiIcon fontSize='large'/>}> Jump and Run Games</MenuItem>
+  <MenuItem component={<Link to="/" />} className={classes.item} icon={<SportsCricketIcon fontSize='large'/>} onClick={()=>dispatch(setCategory('All Games'))}> All Games</MenuItem>
+    <MenuItem component={<Link to="/" />} className={classes.item} icon={<SportsCricketIcon fontSize='large'/>} onClick={()=>dispatch(setCategory('Sports'))}> Sports Games</MenuItem>
+    <MenuItem component={<Link to="/" />} className={classes.item} icon={<ExtensionIcon fontSize='large'/>} onClick={()=>dispatch(setCategory('Puzzle'))}> puzzle Games</MenuItem>
+    <MenuItem component={<Link to="/" />} className={classes.item} icon={<SportsScoreIcon fontSize='large'/>} onClick={()=>dispatch(setCategory('Racing'))}> Racing Games</MenuItem>
+    <MenuItem component={<Link to="/" />} className={classes.item} icon={<QuestionMarkIcon fontSize='large'/>} onClick={()=>dispatch(setCategory('Quiz'))}> Quiz Games</MenuItem>
+    <MenuItem component={<Link to="/" />} className={classes.item} icon={<SportsKabaddiIcon fontSize='large'/>} onClick={()=>dispatch(setCategory('Cards'))}> Cards Games</MenuItem>
     {/* </SubMenu> */} 
   </Menu>
 </Sidebar>

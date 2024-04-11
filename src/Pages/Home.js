@@ -1,75 +1,52 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import classes from './Home.module.css'
+import { useSelector } from 'react-redux';
+import { fetchDataFromBackend } from '../Services/api';
+import categorySlice from '../Slices/categorySlice';
 
 const Home = () => {
 
-  const arr=[
-    {
-      name:"Alien Attack",
-      src:"/assets/AlienAttackTeaser.jpg"
-    },
-    {
-      name:"Block Painter",
-      src:"/assets/BlockPainterTeaser.jpg"
-    },
-    {
-      name:"Bottle Flip",
-      src:"/assets/BottleFlipTeaser.jpg"
-    },
-    {
-      name:"Cowboy Swing",
-      src:"/assets/CowboySwingTeaser.jpg"
-    },
-    {
-      name:"Cut The Rope",
-      src:"/assets/CutTheRopeTeaser.jpg"
-    },
-    {
-      name:"Emoji Fun",
-      src:"/assets/EmojiFunTeaser.jpg"
-    },
-    {
-      name:"Go Around",
-      src:"/assets/GoAroundTeaser.jpg"
-    },
-    {
-      name:"Green Ball",
-      src:"/assets/GreenBallTeaser.jpg"
-    },
-    {
-      name:"Lawn Mower",
-      src:"/assets/LawnMowerTeaser.jpg"
-    },
-    {
-      name:"Pair Up 3d",
-      src:"/assets/PairUp3dTeaser.jpg"
-    },
-    {
-      name:"Peet Sneak",
-      src:"/assets/PeetSneakTeaser.jpg"
-    },
-    {
-      name:"Rising Squares",
-      src:"/assets/RisingSquaresTeaser.jpg"
-    },
-    {
-      name:"Slime Road",
-      src:"/assets/SlimeRoadTeaser.jpg"
-    },
-    {
-      name:"Tower Fall",
-      src:"/assets/TowerFallTeaser.jpg"
-    },
-    {
-      name:"Tower Fall",
-      src:"/assets/TowerFallTeaser.jpg"
-    },
-    {
-      name:"Twisty Lines",
-      src:"/assets/TwistyLinesTeaser.jpg"
+  const {open} = useSelector((state)=>state.sideBarSlice)
+  const {category} = useSelector((state)=>state.categorySlice);
+
+  const [arr,setArr] = useState([])
+
+  
+  console.log(category)
+
+    const fetchData =async()=>{
+      const data = await fetchDataFromBackend();
+      // console.log(data.data);
+      const Games = data.data;
+      if(category=="All Games"){
+        setArr(Games);
+      }
+      else if(category == "Sports"){
+        const arr = Games.filter((item)=>item.category == "Sports")
+        setArr(arr);
+      }
+      else if(category == "Quiz"){
+        const arr = Games.filter((item)=>item.category == "Quiz")
+        setArr(arr);
+      }
+      else if(category == "Puzzle"){
+        const arr = Games.filter((item)=>item.category == "Puzzle")
+        setArr(arr);
+      }
+      else if(category == "Racing"){
+        const arr = Games.filter((item)=>item.category == "Racing")
+        setArr(arr);
+      }
+      else if(category == "Cards"){
+        const arr = Games.filter((item)=>item.category == "Cards")
+        setArr(arr);
+      }
+      
     }
 
-    ]
+    useEffect(()=>{
+      fetchData();
+    },[category])
 
 
 
@@ -77,15 +54,15 @@ const Home = () => {
     <div className={classes.container}>
     <div className={classes.sub_container}>
       <div className={classes.title}>
-      All Games
+      {category}
       </div>
-      <div className={classes.games}>
+      <div className={!open?classes.games:classes.games_when_open}>
       {
-        arr.map((item,idx )=>(
+        arr?.map((item,idx )=>(
           <div className={classes.item_container}>
           <div key={idx} className={classes.item}>
-          <img className={classes.item_img} src={item.src} alt="" />
-          <p>{item.name}</p>
+          <img className={classes.item_img} src={item.img_url} alt="" />
+          <p>{item.game_name}</p>
           <button className={classes.btn}>play</button>
           </div>
           </div>
